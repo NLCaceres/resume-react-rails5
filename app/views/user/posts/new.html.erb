@@ -1,0 +1,48 @@
+<h1>Write a New Post!</h1>
+
+<%= render 'form' %>
+
+<% if false %> 
+This if false block actually works as a block comment! 
+<%-# Form builder object, specifying it's for post and the path-%>
+<%= form_with scope: :post, url: posts_path, local: true do |form| %> 
+
+<%- #The question mark indicates a method returns a bool -%>
+  <% if @post.errors.any? %> 
+    <div id="error-explanation">
+      <h2>
+        <%- # Simple helper func to pluralize the string if count > 1 -%>
+        <%=pluralize(@post.errors.count, "error") %>
+        prevented this post from being saved:
+      </h2>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%- #In the event that there are errors, rails actual wraps the following fields with a div of class field_with_errors that you can style with CSS -%>
+
+  <p>
+    <%= form.label :title %> <br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :description %> <br>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.label :image_url %> <br>
+    <%= form.text_field :image_url %>
+  </p>
+  <p>
+    <%= form.label :github_url %> <br>
+    <%= form.text_field :github_url %>
+  </p>
+  <p><%= form.submit %></p>
+<% end %>
+<% end %>
+
+<%= link_to 'Back', user_posts_path %>

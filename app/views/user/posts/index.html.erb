@@ -1,0 +1,27 @@
+<h1>All Posts</h1>
+
+<%= link_to 'Create a New Post', new_user_post_path %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Image URL</th>
+    <th>Github URL</th>
+  </tr>
+
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.description %></td>
+      <% post.post_images.each do |post_image| %>
+        <td><img src="<%= post_image.image_url %>" alt="<%= post_image.alt_text %>" style="height:200px; width=200px;"></td>
+      <% end %>
+      <td><%= post.github_url %></td>
+      <td><%= link_to 'Show', user_post_path(post) %></td>
+      <td><%= link_to 'Edit', edit_user_post_path(post) %></td>
+      <td><%= link_to 'Destroy', user_post_path(post), method: :delete, data: { confirm: 'Are you sure' } %></td>
+      <%-# Big diff here is options at the end, http DELETE and a confirmation dialog brought to you by rails-ujs in application.html.erb -%>
+    </tr>
+  <% end %>
+</table>

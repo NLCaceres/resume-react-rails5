@@ -1,0 +1,8 @@
+<img src="<%= post_image.image_url %>" alt="<%= post_image.alt_text %>" style="height:200px; width=200px;">
+<p>
+  <strong>Caption: </strong>
+  <%= post_image.alt_text %>
+</p>
+<p>
+  <%= link_to 'Destroy Post Images', [:user, post_image.post, post_image], method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>

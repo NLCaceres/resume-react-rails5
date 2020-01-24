@@ -1,0 +1,45 @@
+<h1>Edit an Old Post!</h1>
+
+<%= render 'form' %>
+
+<% if false %>
+<%-#Passing form_with with model makes rails use PATCH (Http method) to update -%>
+<%-#Difference is scope: :classModel empties the fields! -%>
+<%-#Passing in @post itself will fill in the forms! -%>
+<%= form_with(model: @post, local: true) do |form| %> 
+
+  <% if @post.errors.any? %> 
+    <div id="error-explanation">
+      <h2>
+        <%=pluralize(@post.errors.count, "error") %>
+        prevented this post from being saved:
+      </h2>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :title %> <br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :description %> <br>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.label :image_url %> <br>
+    <%= form.text_field :image_url %>
+  </p>
+  <p>
+    <%= form.label :github_url %> <br>
+    <%= form.text_field :github_url %>
+  </p>
+  <p><%= form.submit %></p>
+<% end %>
+<% end %>
+
+<%= link_to 'Back', user_posts_path %>

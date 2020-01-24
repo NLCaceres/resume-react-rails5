@@ -1,0 +1,13 @@
+<%= form_with(model: [:user, @post, @post.post_images.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :image_url %><br>
+    <%= form.text_field :image_url %>
+  </p>
+  <p>
+    <%= form.label :alt_text %><br>
+    <%= form.text_area :alt_text %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

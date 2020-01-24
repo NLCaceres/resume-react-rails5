@@ -1,0 +1,32 @@
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+ 
+<p>
+  <strong>Description:</strong>
+  <%= @post.description %>
+</p>
+
+<% if false %>
+<p>
+  <strong>Image URL:</strong>
+  <img src="<%= @post.image_url %>" alt="Words" style="height: 300px; width=300px;">
+  <%= @post.image_url %>
+</p>
+<% end %>
+
+<h2>Post Images</h2>
+<%-#In place of array.each func render on them! Simple as that with Rails-%>
+<%= render @post.post_images %>
+
+<h2>Add image links!</h2>
+<%= render 'user/post_images/form' %>
+
+<p>
+  <strong>Github URL:</strong>
+  <%= @post.github_url %>
+</p>
+
+<%= link_to 'Back', user_posts_path %>
+<%= link_to "Edit", edit_user_post_path(@post) %>
