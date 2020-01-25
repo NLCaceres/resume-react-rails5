@@ -30,16 +30,21 @@ def parseAboutMe(json_file)
 end
 
 def parseProjectJSON()
-  json_files = [
-    '/Users/NCaceres/resume-react-rails/db/seeds/Android.json',
-    '/Users/NCaceres/resume-react-rails/db/seeds/iOS.json',
-    '/Users/NCaceres/resume-react-rails/db/seeds/Front-End-Web.json',
-    '/Users/NCaceres/resume-react-rails/db/seeds/Back-End-Web.json',
-    '/Users/NCaceres/resume-react-rails/db/seeds/About-Me.json',
-  ]
-  json_files.each.with_index do |json_file, index|
-    if index == 4
+  # json_files = [
+  #   '/Users/NCaceres/resume-react-rails/db/seeds/Android.json',
+  #   '/Users/NCaceres/resume-react-rails/db/seeds/iOS.json',
+  #   '/Users/NCaceres/resume-react-rails/db/seeds/Front-End-Web.json',
+  #   '/Users/NCaceres/resume-react-rails/db/seeds/Back-End-Web.json',
+  #   '/Users/NCaceres/resume-react-rails/db/seeds/About-Me.json',
+  # ]
+  # Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
+  #   load seed
+  # end
+  Dir[File.join(Rails.root, 'db', 'seeds', '*.json')].sort.each.with_index do |json_file, index|
+    if index == 0
       parseAboutMe(parsedFile(json_file))
+      next
+    elsif index = 4 # GUI Files currently skipped
       next
     end
     parseJSONFile(index, parsedFile(json_file))
@@ -56,7 +61,7 @@ def handleRoutes()
 end
 
 def starter
-  parseProjectJSON()
+  #parseProjectJSON()
   #handleRoutes()
 end
 
