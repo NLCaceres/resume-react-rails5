@@ -1,4 +1,6 @@
 ActiveAdmin.setup do |config|
+  # Must relaunch server for these settings to load in
+
   # == Site Title
   #
   # Set the title that is displayed on the main layout
@@ -124,7 +126,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  # config.comments = false
+  config.comments = false
   #
   # You can change the name under which comments are registered:
   # config.comments_registration_name = 'AdminComment'
@@ -271,7 +273,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  # config.default_per_page = 30
+  config.default_per_page = 6
   #
   # You can control the max per page count too.
   #
@@ -317,7 +319,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-  # config.footer = 'my custom footer text'
+  config.footer = 'Resume React + Rails 2.0!'
 
   # == Sorting
   #
