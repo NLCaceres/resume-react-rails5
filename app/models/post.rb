@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 
   validates :title, presence: true, length: { minimum: 5} # Built right into Rails Models!
 
-  enum project_type: [ :android, :iOS, :front_end, :back_end, :gui ]
+  enum project_type: [ :android, :back_end, :front_end, :gui, :iOS ]
   enum project_size: [ :major_project, :small_project ]
 
   def self.select_without(*columns)
