@@ -12,13 +12,15 @@ end
 def saveProject(project_type, project_size, project_list) 
   project_list.each do |project|
     homepage_url = project['url'] != nil ? project['url'] : nil
-    new_post = Post.create(title: project['name'], description: project['desc'], github_url: project['github'], homepage_url: homepage_url, project_type: project_type, project_size: project_size)
+    new_post = Post.create(title: project['name'], description: project['desc'], 
+      github_url: project['github'], homepage_url: homepage_url, 
+      project_type: project_type, project_size: project_size)
     parseProjectImgs(new_post, project['images']) 
   end
 end
 def parseJSONFile(project_type, json_file)
   json_file.each_value.with_index do |project_info, index|
-    saveProject(project_type, index, project_info) # Index = project_type / enum so using index works out to 0 = major-projects, 1 = small-project
+    saveProject((project_type-1), index, project_info) # Index = project_type / enum so using index works out to 0 = major-projects, 1 = small-project
   end
 end
 
@@ -30,21 +32,11 @@ def parseAboutMe(json_file)
 end
 
 def parseProjectJSON()
-  # json_files = [
-  #   '/Users/NCaceres/resume-react-rails/db/seeds/Android.json',
-  #   '/Users/NCaceres/resume-react-rails/db/seeds/iOS.json',
-  #   '/Users/NCaceres/resume-react-rails/db/seeds/Front-End-Web.json',
-  #   '/Users/NCaceres/resume-react-rails/db/seeds/Back-End-Web.json',
-  #   '/Users/NCaceres/resume-react-rails/db/seeds/About-Me.json',
-  # ]
-  # Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
-  #   load seed
-  # end
   Dir[File.join(Rails.root, 'db', 'seeds', '*.json')].sort.each.with_index do |json_file, index|
     if index == 0
       parseAboutMe(parsedFile(json_file))
       next
-    elsif index = 4 # GUI Files currently skipped
+    elsif index == 4 # GUI Files currently skipped
       next
     end
     parseJSONFile(index, parsedFile(json_file))
@@ -61,9 +53,9 @@ def handleRoutes()
 end
 
 def starter
-  #parseProjectJSON()
+  parseProjectJSON()
   #handleRoutes()
 end
 
 starter()
-#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
