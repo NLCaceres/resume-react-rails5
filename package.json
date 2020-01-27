@@ -8,8 +8,8 @@
     "yarn": "1.15.2"
   },
   "scripts": {
-    "build": "yarn --cwd client install && yarn --cwd client build",
-    "deploy": "cp -a client/build/. public/",
+    "build": "yarn --cwd react-client install && yarn --cwd react-client build",
+    "deploy": "cp -a react-client/build/. public/",
     "heroku-postbuild": "yarn build && yarn deploy"
   }
 }
