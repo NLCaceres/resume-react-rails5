@@ -8,6 +8,8 @@ may be helpful at 250px instead */
 .cardImgBackupStyle {
   height: 100%;
   max-height: 250px;
+  width: 100%;
+  max-width: 350px;
 }
 .cardText {
   white-space: pre-wrap;
