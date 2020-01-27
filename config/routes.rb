@@ -17,5 +17,8 @@ Rails.application.routes.draw do
   end
   
   root 'user/posts#index' #Tells rails to route root requests to index action of route_list (routeList) controller
+  get '*path', to: "application#fallback_index_html", constraints: -> (request) do
+    !request.xhr? && request.format.html?
+  end
 end
 
