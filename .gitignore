@@ -24,8 +24,12 @@
 /node_modules
 /yarn-error.log
 
-/public/assets
+# React will be making this for us!
+/public
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# May be the reason heroku runs with help from a Puma based Procfile
+.env
