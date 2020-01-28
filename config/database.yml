@@ -24,6 +24,6 @@ test:
 production:
   <<: *default
   database: resume-react-rails_production
-  url: <%= ENV['DATABASE_URL'] %>
-  username: resume-react-rails
-  password: <%= ENV['RESUME-REACT-RAILS_DATABASE_PASSWORD'] %>
+  # url: <%= ENV['DATABASE_URL'] %>
+  # username: resume-react-rails
+  # password: <%= ENV['RESUME-REACT-RAILS_DATABASE_PASSWORD'] %>
