@@ -8,7 +8,7 @@ import {
   CardText,
   CardBody,
   CardTitle,
-  Button
+  Button,
 } from "reactstrap";
 import SimpleCarousel from "../SimpleCarousel/SimpleCarousel";
 import CardImageModal from "../CardImageModal/CardImageModal";
@@ -32,8 +32,8 @@ class PostListView extends Component {
       modalProject: null,
       projectList: {
         majorProjects: [],
-        minorProjects: []
-      } // Without this init, it won't work
+        minorProjects: [],
+      }, // Without this init, it won't work
     };
 
     this.openModal = this.openModal.bind(this);
@@ -80,27 +80,27 @@ class PostListView extends Component {
 
     const projectList = { ...this.state.projectList }; // Spread the object, set its values and set the object!
     projectList.majorProjects = jsonResponse.filter(
-      project => project["project_size"] === "major_project"
+      (project) => project["project_size"] === "major_project"
     );
     projectList.minorProjects = jsonResponse.filter(
-      project => project["project_size"] === "small_project"
+      (project) => project["project_size"] === "small_project"
     );
     this.setState({ projectList: projectList }); // Returns array. Requires array to already exist in state object!
   }
 
   openModal(project) {
     if (project === null) {
-      this.setState(prevState => ({
-        modal: !prevState.modal
+      this.setState((prevState) => ({
+        modal: !prevState.modal,
       }));
     } else {
       if (this.props.viewWidth < 768) {
         // Prevent modal from appearing
         return;
       }
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         modal: !prevState.modal,
-        modalProject: project
+        modalProject: project,
       }));
     }
   }
@@ -131,7 +131,7 @@ class PostListView extends Component {
   }
 }
 
-const ProjectList = props => {
+const ProjectList = (props) => {
   // For future reference, can use nanoid, shortid, uuid from npm for keys on lists or id on forms
   // Otherwise using other props is helpful as a key
   return Object.values(props.projectList).map((projects, i) => {
@@ -154,7 +154,7 @@ const ProjectList = props => {
   });
 };
 
-const ProjectSection = props => {
+const ProjectSection = (props) => {
   const projects = props.projects;
   if (Array.isArray(projects)) {
     return projects.map((project, i) => {
@@ -189,7 +189,7 @@ const ProjectSection = props => {
   }
 };
 
-const LeftSidedCardPost = props => {
+const LeftSidedCardPost = (props) => {
   const project = props.project;
   const imageSrc =
     project.post_images.length > 0
@@ -199,10 +199,8 @@ const LeftSidedCardPost = props => {
     project.post_images.length > 0
       ? project.post_images["0"].alt_text
       : "Placeholder";
-  const backupImgCheck =
-    imageSrc === "https://via.placeholder.com/350.png?text=Profile" ||
-    imageSrc === "https://via.placeholder.com/350.png?text=Project";
-  const aboutMeTitleCheck = project.title !== "Aspiring Jack of All Trades";
+  const backupImg = imageSrc === "https://via.placeholder.com/350.png?text=Project";
+
   return (
     <>
       <Card>
@@ -213,22 +211,22 @@ const LeftSidedCardPost = props => {
                 className={cnames(
                   "align-self-center",
                   {
-                    [postlist.cardImg]: !backupImgCheck,
-                    [postlist.cardImgBackupStyle]: backupImgCheck
+                    [postlist.cardImg]: !backupImg,
+                    [postlist.cardImgBackupStyle]: backupImg,
                   },
                   {
                     [postlist.clickable]:
-                      props.viewWidth >= 992 && aboutMeTitleCheck
+                      props.viewWidth >= 992 && !backupImg,
                   }
                 )}
                 src={imageSrc || project.post_images}
                 alt={imageAlt}
                 onClick={() => {
-                  if (aboutMeTitleCheck) {
+                  if (!backupImg) {
                     props.modalControl(project);
                   }
                 }}
-                onError={e => {
+                onError={(e) => {
                   e.target.onerror = null;
                   e.target.src =
                     "https://via.placeholder.com/350.png?text=Project";
@@ -236,11 +234,11 @@ const LeftSidedCardPost = props => {
                 }}
               />
             ) : (
-              <SimpleCarousel
-                images={project.post_images}
-                viewWidth={props.viewWidth}
-              />
-            )}
+                <SimpleCarousel
+                  images={project.post_images}
+                  viewWidth={props.viewWidth}
+                />
+              )}
           </Col>
           <Col xs="12" md="10">
             <CardBody>
@@ -282,7 +280,7 @@ const LeftSidedCardPost = props => {
   );
 };
 
-const RightSidedCardPost = props => {
+const RightSidedCardPost = (props) => {
   const project = props.project;
   const imageSrc =
     project.post_images.length > 0
@@ -292,6 +290,7 @@ const RightSidedCardPost = props => {
     project.post_images.length > 0
       ? project.post_images["0"].alt_text
       : "Placeholder";
+  const backupImg = imageSrc === "https://via.placeholder.com/350.png?text=Project";
   return (
     <>
       <Card>
@@ -331,14 +330,16 @@ const RightSidedCardPost = props => {
           <Col xs="12" md="2" className="d-flex justify-content-center">
             <img
               className={cnames("align-self-center", postlist.cardImg, {
-                [postlist.clickable]: props.viewWidth >= 768
+                [postlist.clickable]: props.viewWidth >= 768 && !backupImg,
               })}
               src={imageSrc}
               alt={imageAlt}
               onClick={() => {
-                props.modalControl(project);
+                if (!backupImg) { //* If not a backup Img, then allow modal
+                  props.modalControl(project);
+                }
               }}
-              onError={e => {
+              onError={(e) => {
                 e.target.onerror = null;
                 e.target.src =
                   "https://via.placeholder.com/350.png?text=Project";
