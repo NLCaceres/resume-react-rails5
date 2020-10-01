@@ -36,3 +36,5 @@
 
 # May be the reason heroku runs with help from a Puma based Procfile
 .env
+# Suddenly Heroku demands that bin needs to be committed (not sure why)
+!bin
