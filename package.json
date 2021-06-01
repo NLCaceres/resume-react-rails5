@@ -4,8 +4,9 @@
   "dependencies": {},
   "license": "MIT",
   "engines": {
-    "node": "12.4.0",
-    "yarn": "1.21.1"
+    "node": "14.17.0",
+    "yarn": "1.21.10",
+    "npm": "7.15.0"
   },
   "scripts": {
     "build": "yarn --cwd react-client install && yarn --cwd react-client build",
