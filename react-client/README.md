@@ -1,5 +1,9 @@
 # My Personal Resume Site
 
+## Quick Upgrade Notice
+- Immer ^8.0.1
+- Probably shift away from yarn to npm 7 workspaces
+
 ## Plenty to be Added to the List!
 
 - Most of my Web Dev Library
