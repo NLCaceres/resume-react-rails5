@@ -1,29 +1,9 @@
 # My Personal Resume Site
 
-## Quick Upgrade Notice
-- Immer ^8.0.1
-- Probably shift away from yarn to npm 7 workspaces
-
-## Plenty to be Added to the List!
-
-- Most of my Web Dev Library
-  - Front-end for Infection Control App from Angular
-  - Front-End mini projects
-  - Back-end for Infection Control App
+## To Add to Seeder List
+- About Me Edits
+- Laravel + Vue Account On It
 - Most of my experience with classic GUIs (Made in Java)
-- Android Mini Projects
-
-## Recent Changes
-
-Added Modal Views that appear on click of images. Added a brightness darkener on images for desktops BS4 breakpoint.
-Added in Carousels to those modals with project names included
-Added in Carousels for lower breakpoints (mobile devices).
-Single images do not render as carousels across app
-
-## To Be Implemented
-
-Add in React-Router and get rid of tab panels since they all render at once. React Router should in a sense replace the tabs
-speeding things up and separating components into actual pages instead of a giant SPA.
 
 ## Further info about React
 
