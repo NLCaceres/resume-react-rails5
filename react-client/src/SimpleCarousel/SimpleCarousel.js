@@ -9,10 +9,9 @@ import carousel from "./Carousel.module.css";
 import cnames from "classnames";
 const util = require("util");
 
-// Reactstrap carousel requires image array
-// 3 props two required
-// Src and alt text
-// Don't forget key with array list of items in react (so img src)
+//? Reactstrap carousel requires image array
+//@params 3 props two required
+//@params Src (useful as React list key) and alt text
 let images = [];
 
 class SimpleCarousel extends Component {
@@ -26,8 +25,7 @@ class SimpleCarousel extends Component {
     this.goToIndex = this.goToIndex.bind(this);
   }
 
-  // Required prop and gets the animated started
-  next() {
+  next() { //? Required prop func and gets the carousel going
     if (this.animating) return;
     const nextIndex =
       this.state.activeIndex === images.length - 1

@@ -1,5 +1,5 @@
-// This is a component to create a series of posts
-// They will start on the left side and alternate (May refactor for right start as option)
+//* This is a component to create a series of posts
+//* They will start on the left side and alternate (May refactor for right start as option)
 import React, { Component } from "react";
 import {
   Row,
@@ -14,7 +14,7 @@ import SimpleCarousel from "../SimpleCarousel/SimpleCarousel";
 import CardImageModal from "../CardImageModal/CardImageModal";
 import cnames from "classnames";
 import postlist from "./PostList.module.css";
-// import iOSProjects from "../TabPanelData/iOS.json"; // Imports are static so you have to list contents one by one
+// import iOSProjects from "../TabPanelData/iOS.json"; //* Imports are static so you have to list contents one by one (no dynamic imports)
 // import androidProjects from "../TabPanelData/Android.json";
 // import frontEndProjects from "../TabPanelData/Front-End-Web.json";
 // import backEndProjects from "../TabPanelData/Back-End-Web.json";
@@ -33,7 +33,7 @@ class PostListView extends Component {
       projectList: {
         majorProjects: [],
         minorProjects: [],
-      }, // Without this init, it won't work
+      }, //? Without initing all used state, will get errs
     };
 
     this.openModal = this.openModal.bind(this);
@@ -78,14 +78,14 @@ class PostListView extends Component {
     const httpResponse = await fetch(`/api/posts${filterStr}`);
     const jsonResponse = await httpResponse.json();
 
-    const projectList = { ...this.state.projectList }; // Spread the object, set its values and set the object!
+    const projectList = { ...this.state.projectList }; //? Spread the object, set its values and set the object!
     projectList.majorProjects = jsonResponse.filter(
       (project) => project["project_size"] === "major_project"
     );
     projectList.minorProjects = jsonResponse.filter(
       (project) => project["project_size"] === "small_project"
     );
-    this.setState({ projectList: projectList }); // Returns array. Requires array to already exist in state object!
+    this.setState({ projectList: projectList }); //? Sets projectList to array BUT requires array to already exist in state object!
   }
 
   openModal(project) {
@@ -95,8 +95,7 @@ class PostListView extends Component {
       }));
     } else {
       if (this.props.viewWidth < 768) {
-        // Prevent modal from appearing
-        return;
+        return; //* Prevent modal from appearing
       }
       this.setState((prevState) => ({
         modal: !prevState.modal,
@@ -132,8 +131,8 @@ class PostListView extends Component {
 }
 
 const ProjectList = (props) => {
-  // For future reference, can use nanoid, shortid, uuid from npm for keys on lists or id on forms
-  // Otherwise using other props is helpful as a key
+  //? For future reference, can use nanoid, shortid, uuid from npm for keys on lists or id on forms
+  //? Otherwise using other props is helpful as a key
   return Object.values(props.projectList).map((projects, i) => {
     const projectSize = i === 0 ? "Major Projects" : "Small Projects";
     const aboutMeTitle =
