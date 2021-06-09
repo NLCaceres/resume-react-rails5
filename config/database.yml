@@ -24,6 +24,5 @@ test:
 production:
   <<: *default
   database: resume-react-rails_production
-  # url: <%= ENV['DATABASE_URL'] %>
-  # username: resume-react-rails
-  # password: <%= ENV['RESUME-REACT-RAILS_DATABASE_PASSWORD'] %>
+  # //? Heroku Rails apps default to the DB url set in Heroku's config vars, DATABASE_URL (without needing to appear or be set anywhere in the project)
+  # url: <%= ENV['DATABASE_URL'] %> # //? So this can remain commented out and work just fine!

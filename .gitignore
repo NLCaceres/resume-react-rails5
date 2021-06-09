@@ -36,5 +36,6 @@
 
 # May be the reason heroku runs with help from a Puma based Procfile
 .env
-# Suddenly Heroku demands that bin needs to be committed (not sure why)
+
+# Keep the bin directory to be sure bin/rails commands can be issued
 !bin
