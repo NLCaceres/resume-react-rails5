@@ -81,7 +81,7 @@ const MobileNav = props => {
           "px-3 py-1",
           "font-weight-bold"
         )}
-        href="/"
+        href="/portfolio"
       >
         Nick Caceres
       </NavbarBrand>
@@ -108,13 +108,13 @@ const FullNav = props => {
         />
       </Collapse>
       <NavbarBrand
-        className={cnames(
-          navbar.brand, // indicates css class
+        className={cnames( //? 'Classnames' pkg adds conditional logic to React's className prop
+          navbar.brand, //? React injects brand class from 'navbar' css module and ensures proper scoping w/out namespace clashes
           "border border-dark rounded thick-full-border",
-          "px-3 py-1",
-          "font-weight-bold"
+          "px-3 py-1", //* Admittedly, not sure 'classnames' is important here though...
+          "font-weight-bold" //? Since these 3 lines are simply joined together (e.g. '...py-1 font-weight-bold...')
         )}
-        href="/resume-react"
+        href="/portfolio"
       >
         Nick Caceres
       </NavbarBrand>
@@ -156,7 +156,7 @@ const NavButtons = props => {
         style={{ height: 40 + "px" }}
         key={tabNames[Object.keys(tabNames)[i]]}
       >
-        <NavLink // Different than Reactstrap or reg 'a' tag - doesn't require href attr
+        <NavLink //? Different than Reactstrap or reg 'a' tag - doesn't require href attr
           to={`/${Object.keys(tabNames)[i]}`}
           className={cnames(navbar.navButton, "text-wrap px-3 w-100 h-100", {
             //[navbar.navButton]: props.activeTab !== Object.keys(tabNames)[i],

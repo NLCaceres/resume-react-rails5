@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import SimpleNavBar from "./SimpleNavbar/SimpleNavbar";
 import PostListView from "./PostListView/PostListView.js";
 import throttle from "lodash.throttle";
@@ -49,70 +49,69 @@ class App extends Component {
   }
 
   render() {
+    //* Prevent double redirects BUT on initial viewing redirect to /portfolio
     return (
-      <BrowserRouter basename="/resume-react">
-        <SimpleNavBar openTab={this.openTab} viewWidth={this.state.width} />
+      <BrowserRouter>
+        <FullPage openTab={this.openTab} viewWidth={this.state.width}/>
+        {/* //? React-Router works in 3 parts, Router > Switch > Route/Redirect. You ALWAYS need those 3 parts, nested like so  */}
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={routeProps => (
-              <PostListView
-                tabId="About Me!"
-                viewWidth={this.state.width}
-                location={routeProps.location}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/iOS"
-            render={routeProps => (
-              <PostListView
-                tabId="iOS"
-                viewWidth={this.state.width}
-                location={routeProps.location}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/android"
-            render={routeProps => (
-              <PostListView
-                tabId="Android"
-                viewWidth={this.state.width}
-                location={routeProps.location}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/front-end"
-            render={routeProps => (
-              <PostListView
-                tabId="Front-End"
-                viewWidth={this.state.width}
-                location={routeProps.location}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/back-end"
-            render={routeProps => (
-              <PostListView
-                tabId="Back-End"
-                viewWidth={this.state.width}
-                location={routeProps.location}
-              />
-            )}
-          />
-          <Route component={NoMatchFoundPage} />
+          {/* //? If you place any regular components in a switch, it'll override any Routes/Redirects that come after it */}
+          {/* //? Redirects NEED to be placed in Switches just like Routes */}
+          <Redirect exact from="/" to="/portfolio/about-me" />
+          {/* //* Any redirects at basename='portfolio' level need to be handled there, any at root here */}
         </Switch>
       </BrowserRouter>
     );
   }
+}
+
+const FullPage = props => {
+  return (
+    <BrowserRouter basename="/portfolio">
+      <SimpleNavBar openTab={props.openTab} viewWidth={props.viewWidth} />
+        <Switch>
+          <Route exact path="/iOS"
+            render={routeProps => (
+              <PostListView tabId="iOS"
+                viewWidth={props.viewWidth}
+                location={routeProps.location} />
+            )} 
+          />
+          <Route exact path="/android"
+            render={routeProps => (
+              <PostListView tabId="Android"
+                viewWidth={props.viewWidth}
+                location={routeProps.location} />
+            )} 
+          />
+          <Route exact path="/front-end"
+            render={routeProps => (
+              <PostListView tabId="Front-End"
+                viewWidth={props.viewWidth}
+                location={routeProps.location} />
+            )} 
+          />
+          <Route exact path="/back-end"
+            render={routeProps => (
+              <PostListView tabId="Back-End"
+                viewWidth={props.viewWidth}
+                location={routeProps.location} />
+            )} 
+          />
+          <Route exact path="/about-me"
+            render={routeProps => (
+              <PostListView tabId="About Me!"
+                viewWidth={props.viewWidth}
+                location={routeProps.location} />
+            )} 
+          />
+          <Redirect exact from="/" to="/about-me" /> {/*//* Without this route before the next redirect, always end up at 404 */}
+
+          <Route exact path="/not-found" component={ NoMatchFoundPage } />
+          <Redirect to="/not-found"/> {/* //? Redirects, if placed last, can be fallbacks just like Routes! */}
+        </Switch>
+    </BrowserRouter>
+  );
 }
 
 const NoMatchFoundPage = () => {
@@ -129,12 +128,13 @@ const NoMatchFoundPage = () => {
   ];
   const rand = Math.floor(Math.random() * 9);
   const imgSrc = randomImgSet[rand];
-  console.log(rand);
+  //* Padding-left: 10px for h1, h4
+  //* Padding-left: 20px for img
   return (
     <div>
-      <h1>Sorry Not Much to See Here!</h1>
-      <img src={imgSrc} className="not-found-img" />
-      <h4>So Here's a Puppy to Make Up for It!</h4>
+      <h1 style={{ marginLeft: "10px" }}>Sorry! Not Much to See Here!</h1>
+      <img src={imgSrc} alt="A Cute Pup!" className="not-found-img" />
+      <h4 style={{ marginLeft: "10px", marginTop: "10px" }}>So Here's a Puppy to Make Up for It!</h4>
     </div>
   );
 };
