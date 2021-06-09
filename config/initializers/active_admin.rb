@@ -319,7 +319,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-  config.footer = 'Resume React + Rails 2.0!'
+  config.footer = 'React + Rails Portfolio 2.0!'
 
   # == Sorting
   #
