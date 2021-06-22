@@ -1,13 +1,7 @@
 import React, { Component } from "react";
+import Logo from "../logo.svg";
 import { NavLink } from "react-router-dom";
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavbarToggler,
-  Collapse
-} from "reactstrap";
+import { Navbar, NavbarBrand, Nav, NavItem, NavbarToggler, Collapse } from "reactstrap";
 import cnames from "classnames";
 import navbar from "./Navbar.module.css";
 
@@ -76,14 +70,15 @@ const MobileNav = props => {
     <>
       <NavbarBrand
         className={cnames(
-          navbar.header,
+          navbar.brand,
           "border border-dark rounded thick-border",
-          "px-3 py-1",
+          "px-3 py-0",
           "font-weight-bold"
         )}
         href="/portfolio"
       >
         Nick Caceres
+        <img src={Logo} className="ml-2" width="38" height="38" alt="" />
       </NavbarBrand>
       <Collapse isOpen={props.isOpened} navbar>
         <NavList
@@ -111,12 +106,13 @@ const FullNav = props => {
         className={cnames( //? 'Classnames' pkg adds conditional logic to React's className prop
           navbar.brand, //? React injects brand class from 'navbar' css module and ensures proper scoping w/out namespace clashes
           "border border-dark rounded thick-full-border",
-          "px-3 py-1", //* Admittedly, not sure 'classnames' is important here though...
+          "px-3 py-0", //* Admittedly, not sure 'classnames' is important here though...
           "font-weight-bold" //? Since these 3 lines are simply joined together (e.g. '...py-1 font-weight-bold...')
         )}
         href="/portfolio"
       >
         Nick Caceres
+        <img src={Logo} className="ml-2" width="45" height="45" alt=""></img>
       </NavbarBrand>
     </>
   );
