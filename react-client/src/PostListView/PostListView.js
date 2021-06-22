@@ -1,27 +1,13 @@
-//* This is a component to create a series of posts
-//* They will start on the left side and alternate (May refactor for right start as option)
+//* Component: Lists posts, alternating left to right (May refactor for right start as an option)
 import React, { Component } from "react";
-import {
-  Row,
-  Col,
-  Card,
-  CardText,
-  CardBody,
-  CardTitle,
-  Button,
-} from "reactstrap";
+import { Row, Col, Card, CardText, CardBody, CardTitle, Button } from "reactstrap";
 import SimpleCarousel from "../SimpleCarousel/SimpleCarousel";
 import CardImageModal from "../CardImageModal/CardImageModal";
 import cnames from "classnames";
 import postlist from "./PostList.module.css";
-// import iOSProjects from "../TabPanelData/iOS.json"; //* Imports are static so you have to list contents one by one (no dynamic imports)
-// import androidProjects from "../TabPanelData/Android.json";
-// import frontEndProjects from "../TabPanelData/Front-End-Web.json";
-// import backEndProjects from "../TabPanelData/Back-End-Web.json";
-// import aboutMe from "../TabPanelData/About-Me.json";
-const util = require("util"); // Helps debug JS objects
-
-// FUTURE INSTALL FOR UNIQUE KEYS - Nano-ID
+import ConsoleLogger from "../Utility/LoggerFuncs";
+//* 'Import' loads statically, so if grabbing json data from files in a particular dir, have to grab each file one by one
+// import iOSProjects from "../TabPanelData/iOS.json";
 
 class PostListView extends Component {
   constructor(props) {
@@ -38,7 +24,6 @@ class PostListView extends Component {
 
     this.openModal = this.openModal.bind(this);
     this.fetchProjects = this.fetchProjects.bind(this);
-    //this.fetchAboutMe = this.fetchAboutMe.bind(this);
     this.fetchProjectSet = this.fetchProjectSet.bind(this);
   }
 
@@ -49,14 +34,14 @@ class PostListView extends Component {
   async componentDidUpdate(prevProps) {
     // !!! CHECK IF IT IS CONSTANTLY FIRING!
     if (this.props.location !== prevProps.location) {
-      console.log("Component Update fired");
+      ConsoleLogger("Component Update fired");
       this.fetchProjects();
     }
   }
 
   async fetchProjects() {
     let queryParams = this.props.tabId;
-    console.log(`Tab ID: ${this.props.tabId}`);
+    ConsoleLogger(`Tab ID: ${this.props.tabId}`);
     if (queryParams === "About Me!") {
       const httpResponse = await fetch("/api/posts?project_type=null");
       const jsonResponse = await httpResponse.json();

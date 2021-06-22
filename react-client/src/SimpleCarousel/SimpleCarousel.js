@@ -7,12 +7,11 @@ import {
 } from "reactstrap";
 import carousel from "./Carousel.module.css";
 import cnames from "classnames";
-const util = require("util");
+import ConsoleLogger from "../Utility/LoggerFuncs";
+// const util = require("util"); //? Can help debug JS objects and more! -> Obj example below... May not matter with improved browser tools though
 
-//? Reactstrap carousel requires image array
-//@params 3 props two required
-//@params Src (useful as React list key) and alt text
-let images = [];
+let images = []; //? Reactstrap carousel requires image array prop
+//@params Also required: Src (useful as React list key) and alt text
 
 class SimpleCarousel extends Component {
   constructor(props) {
@@ -51,9 +50,9 @@ class SimpleCarousel extends Component {
   render() {
     const { activeIndex } = this.state;
     const projectImgs = this.props.images;
-    // console.log("Here are the carousel images");
-    // console.log(util.inspect(projectImgs, false, null, true));
-    console.log("Current viewWidth: " + this.props.viewWidth);
+    // ConsoleLogger("Here are the carousel images");
+    // ConsoleLogger(util.inspect(projectImgs, false, null, true));
+    ConsoleLogger("Current viewWidth: " + this.props.viewWidth);
     const slides = projectImgs.map(image => {
       return (
         <CarouselItem key={image.image_url}>

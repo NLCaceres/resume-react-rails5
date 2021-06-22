@@ -7,6 +7,7 @@ import throttle from "lodash.throttle";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import ConsoleLogger from "./Utility/LoggerFuncs";
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class App extends Component {
   }
 
   openTab(tab) {
-    console.log(`Open tab called`);
+    ConsoleLogger(`Open tab called`);
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
