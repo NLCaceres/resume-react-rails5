@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 # Use sqlite3 as the database for Active Record
 gem 'pg' # Use postgres for Heroku Database 
 # Use Puma as the app server
-gem 'puma', '~> 4.3', '>= 4.3.5'
+gem 'puma', '~> 4.3'
 # Use SCSS for ActiveAdmin stylesheets (since react handles the rest)
 gem 'sass-rails', '~> 6'
 # Use Uglifier as compressor for JavaScript assets - Needed for activeAdmin but probably also helpful to doubly reduce size 
