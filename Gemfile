@@ -9,8 +9,6 @@ gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 gem 'pg' # Use postgres for Heroku Database 
 # Use Puma as the app server
 gem 'puma', '~> 4.3', '>= 4.3.5'
-# Use SCSS for ActiveAdmin stylesheets (since react handles the rest)
-gem 'sass-rails', '~> 6'
 # Use Uglifier as compressor for JavaScript assets - Needed for activeAdmin but probably also helpful to doubly reduce size 
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -36,6 +34,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# Use SCSS for ActiveAdmin stylesheets (since react handles the rest)
+gem 'sassc-rails'
 # ActiveAdmin
 gem 'devise'
 gem 'activeadmin'
